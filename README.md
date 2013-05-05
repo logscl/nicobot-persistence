@@ -1,11 +1,11 @@
 nicobot-persistence API
 ===================
 
-L'API est une API REST, chaque requete ou réponse est en JSON. Elle est composée actuellement de 2 services : **Messages** et **Links**.
+L'API est une API REST, chaque requete ou rÃ©ponse est en JSON. Elle est composÃ©e actuellement de 2 services : **Messages** et **Links**.
 
 ## Service Messages
 
-  Ce service permet d'ajouter/récupérer une liste de messages.
+  Ce service permet d'ajouter/rÃ©cupÃ©rer une liste de messages.
   
 #### Description d'un message
 ```javascript
@@ -15,26 +15,27 @@ var Message = {
   message    : String
 }
 ```
-Chaque message est donc composé de 3 champs :
-* postedDate : la date et l'heures à laquelle le message a été transmis
-* username : le nom de l'utilisateur qui a envoyé le message
-* message : le message à proprement parler
+Chaque message est donc composÃ© de 3 champs :
+* postedDate : la date et l'heures Ã  laquelle le message a Ã©tÃ© transmis
+* username : le nom de l'utilisateur qui a envoyÃ© le message
+* message : le message Ã  proprement parler
 
-#### Récuperation des messages
+#### RÃ©cuperation des messages
 
-Ce service permet de retourner les *n* derniers messages enregistrés.
+Ce service permet de retourner les *n* derniers messages enregistrÃ©s.
 
-> GET /messages?max_messages=x&start_date=y
+> GET /messages?limit=x&start_date=y
 
-**Paramètres :**
-  * `max_messages` : le nombre maximum de message à retourner (Par défaut : 10) 
-  * `start_date` : à partir de quelle date/heure il faut retourner des messages (Par défaut : T-5minutes).
-
+**ParamÃ¨tres :**
+  * `start_date` : Ã  partir de quelle date/heure il faut retourner des messages (Par dÃ©faut : `undefined`)
+  * `start` : indice de dÃ©but de la pagination (Par dÃ©faut : `0`)
+  * `limit` : le nombre maximum de message Ã  retourner (Par dÃ©faut : `10`) 
+   
 Cela signifie donc qu'il y a une double limite pour ce service.
 
 *Exemple :* 
-  Il y a 15 messages de sauvegardés pour les 5 dernieres minutes.
-  Une requete est effectuée avec les paramètres par défaut, alors seul les 10 derniers messages seront retournés. 
+  Il y a 15 messages de sauvegardÃ©s pour les 5 dernieres minutes.
+  Une requete est effectuÃ©e avec les paramÃ¨tres par dÃ©faut, alors seul les 10 derniers messages seront retournÃ©s. 
   
 **Retour du service :**
 ```javascript
@@ -42,7 +43,12 @@ Cela signifie donc qu'il y a une double limite pour ce service.
   "content" : [
       Message,
       ...
-  ]
+  ],
+  "paging" : {
+      start: 0,
+      limit: 10,
+      total: 15
+  }
 }
 ```
 
@@ -52,9 +58,9 @@ Ce service permet de sauvegarder 1 ou plusieurs messages.
 
 > POST /messages
   
-**Paramètre :**
+**ParamÃ¨tre :**
 
-  Le corps de la requete est composé d'un tableau `messages` qui contient le ou les messages à ajouter.
+  Le corps de la requete est composÃ© d'un tableau `messages` qui contient le ou les messages Ã  ajouter.
 
 ```javascript
   {
@@ -67,7 +73,7 @@ Ce service permet de sauvegarder 1 ou plusieurs messages.
 
 ## Service Links
 
-  Ce service permet d'ajouter/récupérer un lien.
+  Ce service permet d'ajouter/rÃ©cupÃ©rer un lien.
   
 #### Description d'un lien
 ```javascript
@@ -76,17 +82,17 @@ var Link = {
   count : int
 }
 ```
-Chaque lien est donc composé de 2 champs :
+Chaque lien est donc composÃ© de 2 champs :
 * link : le lien
-* count : le nombre de fois qu'il a déjà été partagé
+* count : le nombre de fois qu'il a dÃ©jÃ  Ã©tÃ© partagÃ©
 
-#### Récuperation d'un lien
+#### RÃ©cuperation d'un lien
 
-Ce service permet de savoir si un lien a déjà été partagé et si oui, de savoir le nombre de fois qu'il l'a été.
+Ce service permet de savoir si un lien a dÃ©jÃ  Ã©tÃ© partagÃ© et si oui, de savoir le nombre de fois qu'il l'a Ã©tÃ©
 
 > GET /links?link=x
 
-**Paramètres :**
+**ParamÃ¨tres :**
   * `link` : le lien complet (avec le http://)
 
 **Retour du service :**
@@ -98,15 +104,15 @@ Ce service permet de savoir si un lien a déjà été partagé et si oui, de savoir l
 }
 ```
 
-#### Ajout/mise à jour d'un lien
+#### Ajout/mise Ã  jour d'un lien
 
-Ce service permet de sauvegarder 1 lien. Si le lien est déjà présent son compteur de partage est augmenté de 1.
+Ce service permet de sauvegarder 1 lien. Si le lien est dÃ©jÃ  prÃ©sent son compteur de partage est augmentÃ© de 1.
 
 > POST /messages
   
-**Paramètre :**
+**ParamÃ¨tre :**
 
-  Le corps de la requete est composé d'un objet `link` qui contient le lien à ajouter.
+  Le corps de la requete est composÃ© d'un objet `link` qui contient le lien Ã  ajouter.
 
 ```javascript
   {
