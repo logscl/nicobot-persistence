@@ -6,6 +6,7 @@ var Config          = require('./lib/Config');
 
 var MessageEndpoint = require('./lib/endpoint/MessageEndpoint');
 var LinkEndpoint    = require('./lib/endpoint/LinkEndpoint');
+var Authentication  = require('./lib/auth/Authentication');
 
 console.log("Server is starting ...");
 
@@ -13,6 +14,8 @@ var app = express();
 
 app.use(logger('tiny'));
 app.use(bodyParser.json());
+
+app.use(Authentication.authenticateUser);
 
 console.log("Creating routes ...");
 
@@ -25,7 +28,6 @@ app._router.stack.forEach(function(r){
     console.log(r.route.path)
   }
 })
-
 
 
 app.listen(Config.SERVER_PORT);

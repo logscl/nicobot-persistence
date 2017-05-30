@@ -3,9 +3,14 @@ nicobot-persistence API
 
 L'API est une API REST, chaque requete ou réponse est en JSON. Elle est composée actuellement de 2 services : **Messages** et **Links**.
 
+## Authentification
+Pour utiliser l'API, il faut être authentifié. Pour ce faire, il faut ajouter un paramètre `token` dans l'URL de toutes les requetes.
+
+> GET /messages?token=\<TOKEN\>&limit=x&start_date=y
+
 ## Service Messages
 
-  Ce service permet d'ajouter/récupérer une liste de messages.
+Ce service permet d'ajouter/récupérer une liste de messages.
   
 #### Description d'un message
 ```javascript
