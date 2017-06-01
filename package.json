@@ -1,11 +1,13 @@
 {
-  "name":	"nicobot_persistence",
+  "name": "nicobot_persistence",
   "description": "Module de persistence de nicobot",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": true,
   "dependencies": {
-    "express": "3.1.0",
-	"express-resource": "1.0.0",
-	"mysql": "2.0.0-alpha7"
+    "body-parser": "^1.17.2",
+    "express": "4.15.3",
+    "express-resource": "1.0.0",
+    "morgan": "^1.8.2",
+    "mysql": "2.13.0"
   }
 }
