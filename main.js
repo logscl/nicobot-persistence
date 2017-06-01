@@ -2,6 +2,7 @@ var express         = require('express');
 var logger          = require('morgan');
 var bodyParser      = require('body-parser');
 var expressResource = require('express-resource');
+var compression     = require('compression');
 var Config          = require('./lib/Config');
 
 var MessageEndpoint = require('./lib/endpoint/MessageEndpoint');
@@ -14,6 +15,7 @@ var app = express();
 
 app.use(logger('tiny'));
 app.use(bodyParser.json());
+app.use(compression());
 
 app.use(Authentication.authenticateUser);
 
