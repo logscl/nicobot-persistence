@@ -7,6 +7,7 @@ var Config          = require('./Config');
 
 var MessageEndpoint = require('./message/MessageEndpoint');
 var LinkEndpoint    = require('./link/LinkEndpoint');
+var HgtEndpoint     = require('./hgt/HgtEndpoint');
 var Authentication  = require('./auth/Authentication');
 
 console.log("Server is starting ...");
@@ -23,6 +24,10 @@ console.log("Creating routes ...");
 
 app.resource('messages', MessageEndpoint);
 app.resource('links', LinkEndpoint);
+
+app.resource('scores/:channel', HgtEndpoint);
+app.get('/scores/:channel/:year', HgtEndpoint.byYear);
+app.get('/scores/:channel/:year/:week', HgtEndpoint.byWeek);
 
 console.log("Routes : ");
 app._router.stack.forEach(function(r){

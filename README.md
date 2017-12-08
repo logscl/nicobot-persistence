@@ -1,7 +1,7 @@
 nicobot-persistence API
 ===================
 
-L'API est une API REST, chaque requete ou réponse est en JSON. Elle est composée actuellement de 2 services : **Messages** et **Links**.
+L'API est une API REST, chaque requete ou réponse est en JSON. Elle est composée actuellement de 3 services : **Messages**, **Links** et **Scores**.
 
 ## Authentification
 Pour utiliser l'API, il faut être authentifié. Pour ce faire, il faut ajouter un paramètre `token` dans l'URL de toutes les requetes.
@@ -132,4 +132,97 @@ Ce service permet de sauvegarder 1 lien. Si le lien est déjà présent son comp
       Link
   ]
 }
+```
+
+## Service Scores
+
+Ce service permet de récupérer une liste de scores pour le HGT.
+
+#### Description d'un score
+```javascript
+var Score = {
+  userId : string,
+  score  : integer
+}
+```
+Chaque score est donc composé de 2 champs :
+* userId : un identifiant unique d'utilisateur
+* score : le nombre de point de l'utilisateur sur la semaine (ou l'année)
+
+#### Récuperation des scores
+
+Ce service est disponible en plusieurs variantes pour coller aux cas d'utilisation principaux.
+
+##### Récupération des scores de la semaine courante
+
+> GET /scores/{channel}
+
+**Paramètres :**
+  * `channel` : l'identifiant unique du channel pour lequel il faut récupérer les scores
+
+**Retour du service :**
+```javascript
+{
+  "scores" : [
+      Score,
+      ...
+  ]
+}
+```
+
+##### Récupération des scores pour une année
+
+> GET /scores/{channel}/{year}
+
+**Paramètres :**
+  * `channel` : l'identifiant unique du channel pour lequel il faut récupérer les scores
+  * `year` : l'année (AAAA) pour laquelle il faut récupérer le score des utilisateurs 
+
+**Retour du service :**
+```javascript
+{
+  "scores" : [
+      Score,
+      ...
+  ]
+}
+```
+
+##### Récupération des scores pour une semaine
+
+> GET /scores/{channel}/{year}/{week}
+
+**Paramètres :**
+  * `channel` : l'identifiant unique du channel pour lequel il faut récupérer les scores
+  * `year` : l'année (AAAA)
+  * `week` : le numéro de la semaine (entre 1 et 52)
+
+**Retour du service :**
+```javascript
+{
+  "scores" : [
+      Score,
+      ...
+  ]
+}
+```
+#### Ajout de score
+
+Ce service permet de sauvegarder 1 point pour la semaine courante pour un ou plusieurs utilisateurs.
+
+> POST /scores/{channel}
+  
+**Paramètres :**
+
+  * `channel` : l'identifiant unique du channel pour lequel il faut ajouter les scores
+
+Le corps de la requete est composé d'un tableau `users` qui contient le ou les utilisateurs dont le score doit etre augmenté de 1 point.
+
+```javascript
+  {
+    "users" : [
+        userId1,
+        userId2
+    ]
+  }
 ```
