@@ -1,8 +1,8 @@
 var util        = require('util');
 
-var Response    = require('../dto/Response');
-var User        = require('../model/User');
-var UserService = require('../service/UserService');
+var Response    = require('../common/dto/Response');
+var User        = require('../user/User');
+var UserService = require('../user/UserService');
 
 var userService = new UserService();
 

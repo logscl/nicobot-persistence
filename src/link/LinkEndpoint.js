@@ -1,8 +1,8 @@
 var util 		= require('util');
 
-var Response 	= require('../dto/Response');
-var Link	 	= require('../model/Link');
-var LinkService	= require('../service/LinkService');
+var Response 	= require('../common/dto/Response');
+var Link	 	= require('./Link');
+var LinkService	= require('./LinkService');
 
 var linkService = new LinkService();
 

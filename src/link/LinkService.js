@@ -1,5 +1,5 @@
-var BaseService	= require('./BaseService');
-var LinkDAO 	= require('../dao/LinkDao');
+var BaseService	= require('../common/service/BaseService');
+var LinkDAO 	= require('./LinkDao');
 
 module.exports = LinkService;
 

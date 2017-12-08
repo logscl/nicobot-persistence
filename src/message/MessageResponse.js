@@ -1,4 +1,4 @@
-var Response = require('./Response');
+var Response = require('../common/dto/Response');
 var MessageDto = require('./MessageDto');
 
 module.exports = MessageResponse;

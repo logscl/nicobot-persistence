@@ -1,8 +1,8 @@
 var util			= require('util');
 
 var DBConnection	= require('../DBConnection');
-var Message 		= require('../model/Message');
-var BaseDAO 		= require('./BaseDao');
+var Message 		= require('./Message');
+var BaseDAO 		= require('../common/dao/BaseDao');
 
 module.exports = MessageDAO;
 

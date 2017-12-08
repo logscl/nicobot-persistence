@@ -1,5 +1,5 @@
-var BaseService = require('./BaseService');
-var UserDAO     = require('../dao/UserDao');
+var BaseService = require('../common/service/BaseService');
+var UserDAO     = require('./UserDao');
 
 module.exports = UserService;
 
