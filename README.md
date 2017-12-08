@@ -1,7 +1,7 @@
 nicobot-persistence API
 ===================
 
-L'API est une API REST, chaque requete ou réponse est en JSON. Elle est composée actuellement de 2 services : **Messages** et **Links**.
+L'API est une API REST, chaque requete ou réponse est en JSON. Elle est composée actuellement de 3 services : **Messages**, **Links** et **Scores**.
 
 ## Authentification
 Pour utiliser l'API, il faut être authentifié. Pour ce faire, il faut ajouter un paramètre `token` dans l'URL de toutes les requetes.
@@ -205,4 +205,24 @@ Ce service est disponible en plusieurs variantes pour coller aux cas d'utilisati
       ...
   ]
 }
+```
+#### Ajout de score
+
+Ce service permet de sauvegarder 1 point pour la semaine courante pour un ou plusieurs utilisateurs.
+
+> POST /scores/{channel}
+  
+**Paramètres :**
+
+  * `channel` : l'identifiant unique du channel pour lequel il faut ajouter les scores
+
+Le corps de la requete est composé d'un tableau `users` qui contient le ou les utilisateurs dont le score doit etre augmenté de 1 point.
+
+```javascript
+  {
+    "users" : [
+        userId1,
+        userId2
+    ]
+  }
 ```

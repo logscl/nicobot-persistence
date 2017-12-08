@@ -9,8 +9,10 @@ module.exports = HgtDAO;
 function HgtDAO() {
     BaseDAO.call(this);
 
-     HgtDAO.SELECT_WEEKLY	= "SELECT userId, week, count(userId) as count FROM happy_geek_time WHERE channelId = %s AND year = %s AND week = %s GROUP BY userId, week";
-     HgtDAO.SELECT_YEARLY	= "SELECT userId, year, count(userId) as count FROM happy_geek_time WHERE channelId = %s AND year = %s GROUP BY userId";
+     HgtDAO.SELECT_WEEKLY	= "SELECT userId, channelId, year, week, count(userId) as count FROM happy_geek_time WHERE channelId = %s AND year = %s AND week = %s GROUP BY userId, week";
+     HgtDAO.SELECT_YEARLY	= "SELECT userId, channelId, year, week, count(userId) as count FROM happy_geek_time WHERE channelId = %s AND year = %s GROUP BY userId";
+     HgtDAO.INSERT          = "INSERT INTO happy_geek_time (userId, channelId, year, week) VALUES ";
+     HgtDAO.INSERT_VALUE    = "(%s, %s, %s, %s)";
 }
 
 HgtDAO.prototype = new BaseDAO();
@@ -18,8 +20,12 @@ HgtDAO.prototype.constructor = HgtDAO;
 
 /**
  * Retrieve scores for all users for a week
- * @param aLink
- * 		The link to retrieve
+ * @param channel
+ *      The channel
+ * @param year
+ *      The year
+ * @param week
+ *      The week
  * @param callback
  * 		A callback function(err, result)
  */
@@ -54,8 +60,10 @@ HgtDAO.prototype.readScoresWeekly = function(channel, year, week, callback) {
 
 /**
  * Retrieve scores for all users for a year
- * @param aLink
- * 		The link to retrieve
+ * @param channel
+ *      The channel
+ * @param year
+ *      The year
  * @param callback
  * 		A callback function(err, result)
  */
@@ -87,6 +95,54 @@ HgtDAO.prototype.readScoresYearly = function(channel, year, callback) {
     });
 }
 
+/**
+ * Persit a collection of scores
+ * @param newScores
+ * 		New scores to persist
+ * @param callback
+ * 		A callback function(err, result)
+ */
+HgtDAO.prototype.create = function(newScores, callback) {
+    var self = this;
+
+    DBConnection.getConnectionPool().getConnection(function(err, connection){
+
+        if (err)  {
+            callback(self._handleDatabaseError(err));
+            return;
+        }
+
+        var insertValues = "";
+
+        for(var i in newScores) {
+            if (i > 0) {
+                insertValues += ",";
+            }
+
+            insertValues += util.format(
+                HgtDAO.INSERT_VALUE,
+                connection.escape(newScores[i].getUserId()),
+                connection.escape(newScores[i].getChannelId()),
+                connection.escape(newScores[i].getYear()),
+                connection.escape(newScores[i].getWeek())
+            );
+        }
+
+        console.log(HgtDAO.INSERT + insertValues);
+
+        connection.query(HgtDAO.INSERT + insertValues, function(err, result){
+            if (err || !result) {
+                callback(self._handleDatabaseError(err));
+            }
+            else {
+                callback(undefined, result.affectedRows);
+            }
+        });
+
+        connection.release();
+    });
+}
+
 HgtDAO.prototype._parseResult = function(result) {
     var res = new Array();
 
@@ -104,8 +160,11 @@ HgtDAO.prototype._parseResult = function(result) {
 
 HgtDAO.prototype._newObject = function(res) {
     var aScore = new Score(
-        res.count,
-        res.userId
+        res.userId,
+        res.channelId,
+        res.year,
+        res.week,
+        res.count
     );
 
     return aScore;

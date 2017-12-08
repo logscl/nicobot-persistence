@@ -14,8 +14,12 @@ HgtService.prototype.constructor = HgtService
 
 /**
  * Get the score for a given week.
- * @param scoreRequest
- *		Information on requested week
+ * @param channel
+ *      The channel
+ * @param year
+ *      The year
+ * @param week
+ *      The week
  * @param callback
  *		A callback function(err, result)
  */
@@ -35,8 +39,10 @@ HgtService.prototype.retrieveWeek = function(channel, year, week, callback) {
 
 /**
  * Get the score for a given year.
- * @param scoreRequest
- *		Information on requested year
+ * @param channel
+ *      The channel
+ * @param year
+ *      The year
  * @param callback
  *		A callback function(err, result)
  */
@@ -44,6 +50,31 @@ HgtService.prototype.retrieveYear = function(channel, year, callback) {
     var self = this;
 
     this._hgtDAO.readScoresYearly(channel, year, function(err, response){
+        if (err || !response) {
+            callback(self._handleDAOError(err));
+        }
+        else {
+            console.log(response);
+            callback(undefined, response);
+        }
+    });
+}
+
+/**
+ * Add users's score for the current week and year.
+ * @param channel
+ *      The channel
+ * @param year
+ *      The year
+ * @param week
+ *      The week
+ * @param callback
+ *		A callback function(err, result)
+ */
+HgtService.prototype.add = function(scores, callback) {
+    var self = this;
+
+    this._hgtDAO.create(scores, function(err, response){
         if (err || !response) {
             callback(self._handleDAOError(err));
         }
