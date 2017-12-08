@@ -3,11 +3,11 @@ var logger          = require('morgan');
 var bodyParser      = require('body-parser');
 var expressResource = require('express-resource');
 var compression     = require('compression');
-var Config          = require('./lib/Config');
+var Config          = require('./Config');
 
-var MessageEndpoint = require('./lib/endpoint/MessageEndpoint');
-var LinkEndpoint    = require('./lib/endpoint/LinkEndpoint');
-var Authentication  = require('./lib/auth/Authentication');
+var MessageEndpoint = require('./message/MessageEndpoint');
+var LinkEndpoint    = require('./link/LinkEndpoint');
+var Authentication  = require('./auth/Authentication');
 
 console.log("Server is starting ...");
 

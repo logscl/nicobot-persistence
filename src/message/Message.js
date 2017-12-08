@@ -1,4 +1,4 @@
-var Error = require('./Error');
+var Error = require('../common/model/Error');
 
 module.exports = Message;
 

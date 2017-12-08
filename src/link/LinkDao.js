@@ -1,8 +1,8 @@
 var util			= require('util');
 
 var DBConnection	= require('../DBConnection');
-var Link	 		= require('../model/Link');
-var BaseDAO 		= require('./BaseDao');
+var Link	 		= require('./Link');
+var BaseDAO 		= require('../common/dao/BaseDao');
 
 module.exports = LinkDAO;
 

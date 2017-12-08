@@ -1,9 +1,9 @@
 var util 			= require('util');
 
-var MessageResponse = require('../dto/MessageResponse');
-var Message 		= require('../model/Message');
-var Paging 		    = require('../model/Paging');
-var MessageService	= require('../service/MessageService');
+var MessageService	= require('./MessageService');
+var MessageResponse = require('./MessageResponse');
+var Message 		= require('./Message');
+var Paging 		    = require('../common/model/Paging');
 
 var messageService = new MessageService();
 
