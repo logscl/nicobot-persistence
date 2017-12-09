@@ -2,18 +2,13 @@ import { Config } from "./Config";
 import { Authentication } from "./auth/Authentication";
 import { HgtEndpoint } from "./hgt/HgtEndpoint";
 import { LinkEndpoint } from "./link/LinkEndpoint";
+import { MessageEndpoint } from "./message/MessageEndpoint";
 
 var express         = require('express');
 var logger          = require('morgan');
 var bodyParser      = require('body-parser');
 var expressResource = require('express-resource');
 var compression     = require('compression');
-
-/*
-var MessageEndpoint = require('./message/MessageEndpoint');
-var LinkEndpoint    = require('./link/LinkEndpoint');
-*/
-
 
 console.log("Server is starting ...");
 
@@ -27,9 +22,7 @@ console.log("Creating routes ...");
 
 app.use(Authentication.authenticateUser);
 
-/*
 app.resource('messages', MessageEndpoint);
-*/
 app.resource('links', LinkEndpoint);
 app.resource('scores/:channel', HgtEndpoint);
 app.get('/scores/:channel/:year', HgtEndpoint.byYear);
