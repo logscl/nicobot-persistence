@@ -1,4 +1,5 @@
 import { Error } from "../common/model/Error";
+import { ErrorItem } from "../common/model/ErrorItem";
 
 export class Message {
 
@@ -19,7 +20,7 @@ export class Message {
     getTimestamp() { return this.timestamp; }
     getUserName() { return this.username; }
     getMessage() { return this.message; }
-    getValidationErrors() { return this.error.getErrors(); }
+    getValidationErrors() : Array<ErrorItem> { return this.error.getErrors(); }
 
     validate() {
         if (!this.timestamp) {

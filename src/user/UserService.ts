@@ -1,6 +1,6 @@
 import { BaseService } from "../common/service/BaseService";
 import { UserDao } from "./UserDao";
-import { ErrorItem } from "../common/model/Error";
+import { ErrorItem } from "../common/model/ErrorItem";
 
 export class UserService extends BaseService {
     private userDao = new UserDao();

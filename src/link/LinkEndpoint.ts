@@ -1,7 +1,7 @@
 import { Link } from "./Link";
 import { Response } from "../common/dto/Response";
 import { LinkService } from "./LinkService";
-import { ErrorItem } from "../common/model/Error";
+import { ErrorItem } from "../common/model/ErrorItem";
 
 export class LinkEndpoint {
 

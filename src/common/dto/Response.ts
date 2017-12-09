@@ -1,4 +1,5 @@
-import { Error, ErrorItem } from "../model/Error";
+import { Error } from "../model/Error";
+import { ErrorItem } from "../model/ErrorItem";
 
 export class Response<T> {
     private error : Error;
