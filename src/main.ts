@@ -1,6 +1,7 @@
 import { Config } from "./Config";
 import { Authentication } from "./auth/Authentication";
 import { HgtEndpoint } from "./hgt/HgtEndpoint";
+import { LinkEndpoint } from "./link/LinkEndpoint";
 
 var express         = require('express');
 var logger          = require('morgan');
@@ -28,8 +29,8 @@ app.use(Authentication.authenticateUser);
 
 /*
 app.resource('messages', MessageEndpoint);
-app.resource('links', LinkEndpoint);
 */
+app.resource('links', LinkEndpoint);
 app.resource('scores/:channel', HgtEndpoint);
 app.get('/scores/:channel/:year', HgtEndpoint.byYear);
 app.get('/scores/:channel/:year/:week', HgtEndpoint.byWeek);
