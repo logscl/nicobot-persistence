@@ -7,11 +7,11 @@ var util            = require('util');
 export class UserDao extends BaseDAO {
 
     private static SELECT_BY_TOKEN : string = "SELECT id, name, token FROM user WHERE token = %s";
- 
+
     constructor() {
         super();
     }
-    
+
     /**
      * Retrieve a user by his token
      * @param aToken
@@ -21,18 +21,18 @@ export class UserDao extends BaseDAO {
      */
     public read(aToken:string, callback:any) {
         var self = this;
-        
+
         DBConnection.getConnectionPool().getConnection(function(err:any, connection:any){
             if (err) {
                 callback(self.handleDatabaseError(err));
                 return;
             }
-            
+
             var queryString = util.format(
                 UserDao.SELECT_BY_TOKEN,
                 connection.escape(aToken)
             );
-            
+
             connection.query(queryString, function(err:any, result:any) {
                 if (err || !result) {
                     callback(self.handleDatabaseError(err));
@@ -41,7 +41,7 @@ export class UserDao extends BaseDAO {
                     callback(undefined, UserDao.newObject(result));
                 }
             });
-            
+
             connection.release();
         });
     }
@@ -50,7 +50,7 @@ export class UserDao extends BaseDAO {
         if (res.length != 0) {
             return new User(res[0].id, res[0].name, res[0].token);
         }
-        
+
         return undefined;
     }
 }

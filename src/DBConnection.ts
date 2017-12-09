@@ -8,13 +8,13 @@ export class DBConnection {
     public static getConnectionPool() : any {
         if (DBConnection.connectionPool == undefined) {
             console.log("[DBConnection] Connection pool was undefined ... creating a new pool");
-            
+
             DBConnection.createPool();
         }
-    
+
         return DBConnection.connectionPool;
     }
-    
+
     public static createPool() {
         DBConnection.connectionPool = mysql.createPool({
             host: 		Config.DB_HOST,
@@ -24,4 +24,4 @@ export class DBConnection {
             database: 	Config.DB_NAME
         });
     }
-} 
+}

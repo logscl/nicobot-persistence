@@ -31,10 +31,10 @@ export class LinkDao extends BaseDAO {
             }
 
             var queryString = util.format(
-                LinkDao.SELECT, 
+                LinkDao.SELECT,
                 connection.escape(aLink.getLink())
             );
-            
+
             connection.query(queryString, function (err:any, result:any) {
                 if (err || !result) {
                     callback(self.handleDatabaseError(err));
@@ -64,10 +64,10 @@ export class LinkDao extends BaseDAO {
                 return;
             }
             var queryString = util.format(
-                LinkDao.INSERT, 
+                LinkDao.INSERT,
                 connection.escape(newLink.getLink())
             );
-            
+
             connection.query(queryString, function (err:any, result:any) {
                 if (err || !result) {
                     callback(self.handleDatabaseError(err));
@@ -81,7 +81,7 @@ export class LinkDao extends BaseDAO {
             connection.release();
         });
     }
-    
+
     update(aLink:Link, callback:any) {
         var self = this;
 
@@ -92,7 +92,7 @@ export class LinkDao extends BaseDAO {
             }
 
             var queryString = util.format(
-                LinkDao.UPDATE, 
+                LinkDao.UPDATE,
                 connection.escape(aLink.getId())
             );
 

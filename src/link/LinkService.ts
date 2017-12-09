@@ -4,7 +4,7 @@ import { LinkDao } from "./LinkDao";
 
 export class LinkService extends BaseService {
 	private linkDao : LinkDao;
-	
+
 	constructor() {
 		super();
 		this.linkDao = new LinkDao();
@@ -19,7 +19,7 @@ export class LinkService extends BaseService {
      */
 	get(aLink:Link, callback:any) {
 		var self = this;
-		
+
 		this.linkDao.read(aLink, function (err:any, response:Link) {
 			if (err || !response) {
 				callback(self._handleDAOError(err));
@@ -30,7 +30,7 @@ export class LinkService extends BaseService {
 			}
 		});
 	}
-	
+
 	add(aLink:Link, callback:any) {
 		var self = this;
 
@@ -62,5 +62,5 @@ export class LinkService extends BaseService {
 			}
 		});
 	}
-	
+
 }

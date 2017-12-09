@@ -9,9 +9,9 @@ export class LinkEndpoint {
 
 	public static index(req:any, res:any) {
 		console.log("[LinkEndpoint] Incoming 'index' request : %j", req.query.link);
-		
+
 		var response = new Response();
-		
+
 		var link = new Link(req.query.link, 0);
 
 		if (!link.validate()) {
@@ -20,7 +20,7 @@ export class LinkEndpoint {
 
 			return;
 		}
-		
+
 		LinkEndpoint.linkService.get(link, function(err:any, result:Link){
 			if (err) {
 				console.log("[LinkEndpoint] Errors : %j", err);
@@ -29,7 +29,7 @@ export class LinkEndpoint {
 			else {
 				response.setContent(LinkEndpoint.getLinkDto(result));
 			}
-			
+
 			res.json(response);
 		});
 	}
@@ -44,12 +44,12 @@ export class LinkEndpoint {
 			res.json();
 			return;
 		}
-		
+
 		var link = new Link(linkBody, 0);
-		
+
 		LinkEndpoint.linkService.add(link, function(err:any, result:Link){
 			var response = new Response();
-			
+
 			if (err) {
 				console.log("[LinkEndpoint] Errors : %j", err);
 				response.addError(new ErrorItem("", err.message));
@@ -57,7 +57,7 @@ export class LinkEndpoint {
 			else {
 				response.setContent(LinkEndpoint.getLinkDto(result));
 			}
-			
+
 			res.json(response.toJSON());
 		});
 	}

@@ -18,7 +18,7 @@ export class Link {
     getLink() { return this.link; }
     getCount() { return this.count; }
     setCount(newCount:number) { this.count = newCount; }
-    
+
     validate() {
         if (!this.link) {
             this.error.addFieldError("link", "Cannot be null");
