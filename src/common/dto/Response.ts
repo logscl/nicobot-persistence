@@ -1,29 +1,35 @@
+import { Error, ErrorItem } from "../model/Error";
+
 export class Response<T> {
-    private errors : Array<Error>;
+    private error : Error;
     private content : T;
 
-    getErrors() : Array<Error> { return this.errors; }
-    setErrors(errors: Array<Error>) { this.errors = errors; }
+    getError() { return this.error; }
+    setError(error: Error) { this.error = error; }
+
     getContent() : T { return this.content; }
     setContent(content: T) { this.content = content; }
 
-    addErrors(errors : Array<Error>) {
-        if (this.errors == undefined) {
-            this.errors = new Array();
-        }	
-        
-        if (Array.isArray(errors)) {
-            this.errors = this.errors.concat(errors);
+    addErrors(errors : Array<ErrorItem>) {
+        if (this.error == undefined) {
+            this.error = new Error();
         }
-        else {
-            this.errors.push(errors);
+
+        for(var error of errors) {
+            this.error.addError(error);
         }
     }
 
-    toJSON() : any {	
+    addError(error : ErrorItem) {
+        this.addErrors([error]);
+    }
+
+    toJSON() : object {
+        var errors = (this.error)? this.error.toJSON() : undefined;
+
         return {
             content: this.content,
-            errors: this.errors
+            errors: errors
         };
     }
 }

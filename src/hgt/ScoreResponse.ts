@@ -11,21 +11,21 @@ export class ScoreResponse extends Response<Score> {
     }
 
     setScores(scores: Array<Score>) { this.scores = scores; }
-    
+
     toJSON() : any {
         return {
             scores : this.transform(),
-            errors: this.getErrors()
+            error: this.getError()
         }
     }
-    
+
     private transform() : Array<ScoreDto>{
         var res = new Array();
-    
+
         for(var score of this.scores) {
             res.push(new ScoreDto(score).toJSON());
         }
-    
+
         return res;
     }
 

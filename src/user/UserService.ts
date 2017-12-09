@@ -1,5 +1,6 @@
 import { BaseService } from "../common/service/BaseService";
 import { UserDao } from "./UserDao";
+import { ErrorItem } from "../common/model/Error";
 
 export class UserService extends BaseService {
     private userDao = new UserDao();
@@ -17,13 +18,13 @@ export class UserService extends BaseService {
      */
     public get(aToken:string, callback:any) {
         var self = this;
-        
+
         this.userDao.read(aToken, function(err:any, response:any){
             if (err) {
                 callback(self._handleDAOError(err));
             }
             else if (!response) {
-                callback("user not found");
+                callback(new ErrorItem("token", "user not found"));
             }
             else {
                 console.log(response);
