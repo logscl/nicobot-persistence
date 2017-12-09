@@ -13,10 +13,13 @@
     "mysql": "2.13.0"
   },
   "scripts": {
-    "start": "npm run build:live",
+    "prepare": "tsc",
+    "start": "node lib/main.js",
+    "startDev": "npm run build:live",
     "build:live": "nodemon --exec ./node_modules/.bin/ts-node -- ./src/main.ts"
   },
-  "main": "index.js",
+  "main": "lib/main.js",
+  "types": "lib/main.d.js",
   "directories": {
     "test": "test"
   },

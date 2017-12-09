@@ -1,4 +1,5 @@
-import { Error, ErrorItem } from "../common/model/Error";
+import { Error} from "../common/model/Error";
+import { ErrorItem } from "../common/model/ErrorItem";
 
 export class Link {
 

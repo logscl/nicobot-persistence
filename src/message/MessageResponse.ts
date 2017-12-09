@@ -3,6 +3,7 @@ import { Response } from "../common/dto/Response";
 import { Paging } from "../common/model/Paging";
 import { MessageDto } from "./MessageDto";
 import { MessageDao } from "./MessageDao";
+import { ErrorItem } from "../common/model/ErrorItem";
 
 export class MessageResponse extends Response<Array<Message>>{
 
@@ -17,7 +18,7 @@ export class MessageResponse extends Response<Array<Message>>{
     setPaging(paging:Paging) { this.paging = paging; }
 
     toJSON() {
-        var errors = (this.getError()) ? this.getError().toJSON() : undefined;
+        var errors:Array<ErrorItem>|undefined = (this.getError()) ? this.getError().toJSON() : undefined;
 
         return {
             messages: this.transform(),

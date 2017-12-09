@@ -1,6 +1,6 @@
 import { UserService } from "../user/UserService";
 import { Response } from "../common/dto/Response";
-import { ErrorItem } from "../common/model/Error";
+import { ErrorItem } from "../common/model/ErrorItem";
 
 export class Authentication {
     private static userService : UserService = new UserService();
