@@ -19,8 +19,3 @@ export class Score {
     getYear() { return this.year; }
     getWeek() { return this.week; }
 }
-
-
-
-
-

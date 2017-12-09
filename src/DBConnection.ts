@@ -17,11 +17,11 @@ export class DBConnection {
 
     public static createPool() {
         DBConnection.connectionPool = mysql.createPool({
-            host: 		Config.DB_HOST,
-            port:		Config.DB_PORT,
-            user: 		Config.DB_USER,
-            password:	Config.DB_PASSWORD,
-            database: 	Config.DB_NAME
+            host:     Config.DB_HOST,
+            port:     Config.DB_PORT,
+            user:     Config.DB_USER,
+            password: Config.DB_PASSWORD,
+            database: Config.DB_NAME
         });
     }
 }

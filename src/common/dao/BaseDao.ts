@@ -1,10 +1,10 @@
 export class BaseDAO {
-	public handleDatabaseError(err: any) : object {
-		console.log("[BaseDAO] Error from database : " + err);
+    public handleDatabaseError(err: any) : object {
+        console.log("[BaseDAO] Error from database : " + err);
 
-		return {
-			layer: 'database',
-			message: err.code
-		};
-	}
+        return {
+            layer: 'database',
+            message: err.code
+        };
+    }
 }
