@@ -24,9 +24,9 @@ app.use(Authentication.authenticateUser);
 
 app.resource('messages', MessageEndpoint);
 app.resource('links', LinkEndpoint);
-app.resource('scores/:channel', HgtEndpoint);
-app.get('/scores/:channel/:year', HgtEndpoint.byYear);
-app.get('/scores/:channel/:year/:week', HgtEndpoint.byWeek);
+app.resource('scores/hgt/:channel', HgtEndpoint);
+app.get('/scores/hgt/:channel/:year', HgtEndpoint.byYear);
+app.get('/scores/hgt/:channel/:year/:week', HgtEndpoint.byWeek);
 
 console.log("Routes : ");
 for (var r of app._router.stack) {
