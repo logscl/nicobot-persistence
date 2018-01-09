@@ -151,11 +151,13 @@ Chaque score est donc composé de 2 champs :
 
 #### Récuperation des scores
 
+##### Récupération des scores Happy Geek Time
+
 Ce service est disponible en plusieurs variantes pour coller aux cas d'utilisation principaux.
 
-##### Récupération des scores de la semaine courante
+###### Récupération des scores HGT de la semaine courante
 
-> GET /scores/{channel}
+> GET /scores/hgt/{channel}
 
 **Paramètres :**
   * `channel` : l'identifiant unique du channel pour lequel il faut récupérer les scores
@@ -170,9 +172,9 @@ Ce service est disponible en plusieurs variantes pour coller aux cas d'utilisati
 }
 ```
 
-##### Récupération des scores pour une année
+###### Récupération des scores HGT pour une année
 
-> GET /scores/{channel}/{year}
+> GET /scores/hgt/{channel}/{year}
 
 **Paramètres :**
   * `channel` : l'identifiant unique du channel pour lequel il faut récupérer les scores
@@ -188,9 +190,9 @@ Ce service est disponible en plusieurs variantes pour coller aux cas d'utilisati
 }
 ```
 
-##### Récupération des scores pour une semaine
+###### Récupération des scores HGT pour une semaine
 
-> GET /scores/{channel}/{year}/{week}
+> GET /scores/hgt/{channel}/{year}/{week}
 
 **Paramètres :**
   * `channel` : l'identifiant unique du channel pour lequel il faut récupérer les scores
@@ -206,11 +208,11 @@ Ce service est disponible en plusieurs variantes pour coller aux cas d'utilisati
   ]
 }
 ```
-#### Ajout de score
+##### Ajout de score au HGT
 
 Ce service permet de sauvegarder 1 point pour la semaine courante pour un ou plusieurs utilisateurs.
 
-> POST /scores/{channel}
+> POST /scores/hgt/{channel}
   
 **Paramètres :**
 
