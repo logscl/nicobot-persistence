@@ -11,7 +11,7 @@ Pour utiliser l'API, il faut être authentifié. Pour ce faire, il faut ajouter 
 ## Service Messages
 
 Ce service permet d'ajouter/récupérer une liste de messages.
-  
+
 #### Description d'un message
 ```javascript
 var Message = {
@@ -34,14 +34,14 @@ Ce service permet de retourner les *n* derniers messages enregistrés.
 **Paramètres :**
   * `start_date` : à partir de quelle date/heure il faut retourner des messages (Par défaut : `undefined`)
   * `start` : indice de début de la pagination (Par défaut : `0`)
-  * `limit` : le nombre maximum de message à retourner (Par défaut : `10`) 
-   
+  * `limit` : le nombre maximum de message à retourner (Par défaut : `10`)
+
 Cela signifie donc qu'il y a une double limite pour ce service.
 
-*Exemple :* 
+*Exemple :*
   Il y a 15 messages de sauvegardés pour les 5 dernieres minutes.
-  Une requete est effectuée avec les paramètres par défaut, alors seul les 10 derniers messages seront retournés. 
-  
+  Une requete est effectuée avec les paramètres par défaut, alors seul les 10 derniers messages seront retournés.
+
 **Retour du service :**
 ```javascript
 {
@@ -62,7 +62,7 @@ Cela signifie donc qu'il y a une double limite pour ce service.
 Ce service permet de sauvegarder 1 ou plusieurs messages.
 
 > POST /messages
-  
+
 **Paramètre :**
 
   Le corps de la requete est composé d'un tableau `messages` qui contient le ou les messages à ajouter.
@@ -79,7 +79,7 @@ Ce service permet de sauvegarder 1 ou plusieurs messages.
 ## Service Links
 
   Ce service permet d'ajouter/récupérer un lien.
-  
+
 #### Description d'un lien
 ```javascript
 var Link = {
@@ -114,7 +114,7 @@ Ce service permet de savoir si un lien a déjà été partagé et si oui, de sav
 Ce service permet de sauvegarder 1 lien. Si le lien est déjà présent son compteur de partage est augmenté de 1.
 
 > POST /messages
-  
+
 **Paramètre :**
 
   Le corps de la requete est composé d'un objet `link` qui contient le lien à ajouter.
@@ -136,7 +136,11 @@ Ce service permet de sauvegarder 1 lien. Si le lien est déjà présent son comp
 
 ## Service Scores
 
-Ce service permet de récupérer une liste de scores pour le HGT.
+Plusieurs services de _scoring_ sont (seront) disponibles. Pour le moment, seul le service lié au jeu du _Happy Geek Time_ existe.
+
+### Service Score - Happy Geek Time
+
+Ce service permet de récupérer ou de mettre à jour une liste de scores pour le HGT.
 
 #### Description d'un score
 ```javascript
@@ -149,13 +153,12 @@ Chaque score est donc composé de 2 champs :
 * userId : un identifiant unique d'utilisateur
 * score : le nombre de point de l'utilisateur sur la semaine (ou l'année)
 
-#### Récuperation des scores
-
-##### Récupération des scores Happy Geek Time
+#### Récuperation des scores _Happy Geek Time_
 
 Ce service est disponible en plusieurs variantes pour coller aux cas d'utilisation principaux.
+Quelque soit le cas d'utilisation le retour sera trié par ordre décroissant de score.
 
-###### Récupération des scores HGT de la semaine courante
+#### Récupération des scores HGT de la semaine courante
 
 > GET /scores/hgt/{channel}
 
@@ -172,13 +175,13 @@ Ce service est disponible en plusieurs variantes pour coller aux cas d'utilisati
 }
 ```
 
-###### Récupération des scores HGT pour une année
+#### Récupération des scores HGT pour une année
 
 > GET /scores/hgt/{channel}/{year}
 
 **Paramètres :**
   * `channel` : l'identifiant unique du channel pour lequel il faut récupérer les scores
-  * `year` : l'année (AAAA) pour laquelle il faut récupérer le score des utilisateurs 
+  * `year` : l'année (AAAA) pour laquelle il faut récupérer le score des utilisateurs
 
 **Retour du service :**
 ```javascript
@@ -190,7 +193,7 @@ Ce service est disponible en plusieurs variantes pour coller aux cas d'utilisati
 }
 ```
 
-###### Récupération des scores HGT pour une semaine
+##### Récupération des scores HGT pour une semaine
 
 > GET /scores/hgt/{channel}/{year}/{week}
 
@@ -213,7 +216,7 @@ Ce service est disponible en plusieurs variantes pour coller aux cas d'utilisati
 Ce service permet de sauvegarder 1 point pour la semaine courante pour un ou plusieurs utilisateurs.
 
 > POST /scores/hgt/{channel}
-  
+
 **Paramètres :**
 
   * `channel` : l'identifiant unique du channel pour lequel il faut ajouter les scores
