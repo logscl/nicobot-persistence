@@ -7,8 +7,8 @@ var util = require('util');
 
 export class HgtDao extends BaseDAO {
 
-    private static SELECT_WEEKLY = "SELECT userId, channelId, year, week, count(userId) as count FROM happy_geek_time WHERE channelId = %s AND year = %s AND week = %s GROUP BY userId, week";
-    private static SELECT_YEARLY = "SELECT userId, channelId, year, week, count(userId) as count FROM happy_geek_time WHERE channelId = %s AND year = %s GROUP BY userId";
+    private static SELECT_WEEKLY = "SELECT userId, channelId, year, week, count(userId) as count FROM happy_geek_time WHERE channelId = %s AND year = %s AND week = %s GROUP BY userId, week ORDER BY count DESC";
+    private static SELECT_YEARLY = "SELECT userId, channelId, year, week, count(userId) as count FROM happy_geek_time WHERE channelId = %s AND year = %s GROUP BY userId ORDER BY count DESC";
     private static INSERT        = "INSERT INTO happy_geek_time (userId, channelId, year, week) VALUES ";
     private static INSERT_VALUE  = "(%s, %s, %s, %s)";
 
