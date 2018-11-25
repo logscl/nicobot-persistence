@@ -1,0 +1,18 @@
+version: '3'
+services:
+  mysql:
+    image: "mysql/mysql-server:5.7"
+    env_file: mysql.env
+    volumes:
+      - ./dbinit.sql:/docker-entrypoint-initdb.d/dbinit.sql
+  api:
+    build: .
+    ports: 
+      - "9999:8080"
+    env_file: api.env
+    links:
+      - mysql
+    volumes:
+      - ./src:/usr/src/app/src:cached
+      - ./package.json:/usr/src/app/package.json:cached
+      - ./package-lock.json:/usr/src/app/package-lock.json:cached
