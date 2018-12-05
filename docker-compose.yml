@@ -15,6 +15,7 @@ services:
     links:
       - mysql
     volumes:
+      - ./node_modules:/usr/src/app/node_modules:cached
       - ./src:/usr/src/app/src:cached
       - ./package.json:/usr/src/app/package.json:cached
       - ./package-lock.json:/usr/src/app/package-lock.json:cached

@@ -36,7 +36,20 @@ CREATE TABLE `happy_geek_time` (
   `year` SMALLINT(6) NOT NULL,
   `week` TINYINT(4) NOT NULL
 )
-COLLATE='latin1_swedish_ci'
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB;
+
+CREATE TABLE `gommette` (
+  `userId` VARCHAR(20) NOT NULL,
+  `giverId` VARCHAR(20) NOT NULL,
+  `reason` TEXT NOT NULL,
+  `type` TINYINT(4) NOT NULL,
+  `yesCount` TINYINT(4) NOT NULL DEFAULT 0,
+  `noCount` TINYINT(4) NOT NULL DEFAULT 0,
+  `creationDate` DATETIME NOT NULL,
+  `valid`BOOLEAN NOT NULL
+)
+COLLATE='utf8_general_ci'
 ENGINE=InnoDB;
 
 
