@@ -350,7 +350,7 @@ Le corps de la requete est composé d'un objet `gommette` qui contient les infor
 
 Un fichier `docker-compose.yml` est présent et permet de démarrer un environnement de développement. voici une petite liste des commandes qu'il est possible d'utiliser pour utiliser le conteneur. Ces commandes sont à exécuter dans le dossier.
 
-* `dc up -d` : démarre l'api et sa base de données. les tables et une clé api (`dev`) est créée au premier démarrage (via le fichier `dbinit.sql`).
+* `dc up -d` : démarre l'api et sa base de données. Les tables et une clé api (`dev`) est créée au premier démarrage (via le fichier `dbinit.sql`).
 * `dc rm mysql` (et `dc rm api`): supprimer les images pour les recréer au prochain démarrage. Utile en cas de modification de la structure de la base de données (via le fichier `dbinit.sql`).
 
 Par défaut, l'api sera accessible sur l'ip suivante: `http://localhost:9080`. Il est possible de développer sans redémarrer.
