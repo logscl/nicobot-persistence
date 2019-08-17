@@ -1,7 +1,6 @@
 import { BaseDAO } from "../common/dao/BaseDao";
 import { DBConnection } from "../DBConnection";
 import { Score } from "./Score";
-import { currentId } from "async_hooks";
 
 var util = require('util');
 

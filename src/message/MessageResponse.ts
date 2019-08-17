@@ -7,8 +7,8 @@ import { ErrorItem } from "../common/model/ErrorItem";
 
 export class MessageResponse extends Response<Array<Message>>{
 
-    private messages:Array<Message>;
-    private paging:Paging;
+    private messages: Array<Message> = new Array<Message>();
+    private paging?: Paging;
 
     constructor() {
         super();
@@ -18,7 +18,7 @@ export class MessageResponse extends Response<Array<Message>>{
     setPaging(paging:Paging) { this.paging = paging; }
 
     toJSON() {
-        var errors:Array<ErrorItem>|undefined = (this.getError()) ? this.getError().toJSON() : undefined;
+        var errors:Array<ErrorItem>|undefined = this.getError() != undefined ? this.getError()!.toJSON() : undefined;
 
         return {
             messages: this.transform(),

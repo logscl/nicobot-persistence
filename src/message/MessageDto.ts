@@ -2,9 +2,9 @@ import { Message } from "./Message";
 
 export class MessageDto {
 
-    private message:string;
-    private username:string;
-    private postedDate:Date;
+    private message?: string;
+    private username?: string;
+    private postedDate?: Date;
 
     constructor(message?:Message) {
         if (message != undefined) {
